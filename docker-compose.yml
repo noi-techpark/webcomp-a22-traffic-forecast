@@ -34,7 +34,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "${API_SERVER_PORT}:${API_SERVER_PORT}"
+      - "9030:${API_SERVER_PORT}"
     tty: true
 
   cdn:
