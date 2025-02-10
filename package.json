@@ -1,13 +1,23 @@
 {
-  "name": "webcomp-boilerplate-helloworld",
+  "name": "webcomp-a22-traffic-forecast",
   "private": true,
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "start": "webpack serve --config webpack.dev.js"
+    "build": "stencil build --config stencil.config.ts --prod",
+    "postbuild": "./scripts/generate-bundles.js",
+    "start": "stencil build --config stencil.config.ts --dev --watch --serve",
+    "docs": "stencil build --config stencil.config.ts --docs",
+    "test": "stencil test --spec --config stencil.config.ts",
+    "lint": "reuse lint"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.23.2",
+    "date-fns": "^4.1.0"
   },
   "devDependencies": {
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "@types/jest": "^29.5.6",
+    "@types/node": "^18.19.70",
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
+    "rollup": "^4.32.1"
   }
 }

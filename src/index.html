@@ -21,16 +21,20 @@ SPDX-License-Identifier: CC0-1.0
 
   Code Snippet:
   <pre><code>
-    &lt;hello-world title="Hello World!"&gt;&lt;/hello-world&gt;
+    &lt;hello-world name="Hello World!"&gt;&lt;/hello-world&gt;
 
-    &lt;script src="webcomp-boilerplate.js"&gt;&lt;/script&gt;
+    &lt;script type="module" src="./app.esm.js"&gt;&lt;/script&gt;
+    &lt;script nomodule src="./app.js"&gt;&lt;/script&gt;
   </code></pre>
 
 
   Output:
   <!-- Set the attribute "title" and refer to it as property in JS -->
-  <hello-world title="Hello World!" />
-  <script src="webcomp-boilerplate.js"></script>
+  <hello-world name="Hello World!" />
+  <script type="module" src="./app.esm.js"></script>
+  <script nomodule src="./app.js"></script>
+<!--  <script type="module" src="./hello-world.entry.js"></script>-->
+<!--  <script src="webcomp-boilerplate.js"></script>-->
 
 </body>
 
