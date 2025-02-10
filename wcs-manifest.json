@@ -1,0 +1,48 @@
+{
+  "title": "Hello-world",
+  "shortName": "hello-world-2",
+  "description": "Hello world simple webcomp example",
+  "descriptionAbstract": "Hello world simple webcomp example",
+  "license": "AGPL-3.0-or-later",
+  "repositoryUrl": "https://your-repository.git",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "authors": [
+    {
+      "name": "...",
+      "email": "...",
+      "organization": "...",
+      "organizationUrl": "..."
+    }
+  ],
+  "image": "wcs-logo.png",
+  "searchTags": [],
+  "dist": {
+    "basePath": "dist",
+    "files": [
+      "webcomp-boilerplate.min.js"
+    ],
+    "scripts": [
+    ]
+  },
+  "configuration": {
+    "tagName": "hello-world",
+    "options": [
+      {
+        "key": "title",
+        "type": "text",
+        "label": "title of the web-comp",
+        "required": false,
+        "options": {
+          "default": "hello-world"
+        }
+      }
+    ]
+  }
+}
