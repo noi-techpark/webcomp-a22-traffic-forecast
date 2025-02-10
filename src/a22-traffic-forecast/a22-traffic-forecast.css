@@ -1,0 +1,356 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+/* variables definition */
+:host {
+    /**
+     * @prop --color-primary: Primary color
+     */
+    --color-primary: #0068B4;
+    /**
+     * @prop --color-primary-rgb: Primary color in RGB format
+     */
+    --color-primary-rgb: 0, 104, 180;
+    /**
+     * @prop --color-secondary: Secondary color
+     */
+    --color-secondary: #00A767;
+    /**
+     * @prop --color-secondary-rgb: Secondary color in RGB format
+     */
+    --color-secondary-rgb: 0, 167, 103;
+
+
+    /**
+     * @prop --color-text: Text color
+     */
+    --color-text: #333333;
+    /**
+     * @prop --color-background: Background color
+     */
+    --color-background: #FFFFFF;
+
+    /**
+     * @prop --color-background-shade: Background dark color
+     */
+    --color-background-shade: #F7F7F7;
+
+    /**
+     * @prop --color-border: Border color
+     */
+    --color-border: #d0d0d0;
+
+    /**
+     * @prop --color-footer: Footer color
+     */
+    --color-footer: #0068b4;
+    /**
+     * @prop --color-footer-contrast: Footer contrast color
+     */
+    --color-footer-contrast: #FFFFFF;
+
+
+    /**
+     * @prop --color-busy-regular: Regular traffic color
+     */
+    --color-busy-regular: #18a767;
+    /**
+     * @prop --color-busy-regular-contrast: Regular traffic contrast color
+     */
+    --color-busy-regular-contrast: #FFFFFF;
+
+    /**
+     * @prop --color-busy-severe: Severe traffic color
+     */
+    --color-busy-severe: #fab813;
+    /**
+     * @prop --color-busy-severe-contrast: Severe traffic contrast color
+     */
+    --color-busy-severe-contrast: #FFFFFF;
+
+    /**
+     * @prop --color-busy-heavy: Heavy traffic color
+     */
+    --color-busy-heavy: #e62243;
+    /**
+     * @prop --color-busy-heavy-contrast: Heavy traffic contrast color
+     */
+    --color-busy-heavy-contrast: #FFFFFF;
+
+    /**
+     * @prop --color-busy-critical: Critical traffic color
+     */
+    --color-busy-critical: #000000;
+    /**
+     * @prop --color-busy-critical-contrast: Critical traffic contrast color
+     */
+    --color-busy-critical-contrast: #FFFFFF;
+
+    /**
+     * @prop --busy-box-size: Size of the box
+     */
+    --busy-box-size: 3em;
+}
+
+
+:host {
+    /*display: block;*/
+    display: grid;
+    contain: content;
+    font-family: inherit;
+
+    background: var(--color-background);
+}
+
+:host(.layout--tablet),
+:host(.layout--mobile) {
+}
+
+:host(.layout) {
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+.layout__scroll {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.layout__title {
+    padding: 12px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.layout__center {
+}
+.layout__spacer {
+    flex:1;
+}
+
+.layout__footer {
+    padding: 12px 8px 0;
+}
+
+/** TITLE */
+.title__label {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 1.1em;
+}
+
+.title__month {
+    color: var(--color-primary);
+    display: inline-block;
+    min-width: 10ch;
+    text-align: right;
+    padding-right: 0.5ch;
+}
+
+.title__year {
+    color: var(--color-text);
+}
+
+.title__btn {
+    color: var(--color-secondary);
+    --color-bg-hover: rgba(var(--color-secondary-rgb), 0.2);
+}
+
+
+/* legend */
+.legend {
+    padding: 8px 12px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    background: var(--color-footer);
+    color: var(--color-text);
+}
+
+.legend__item {
+    padding: 6px 3px;
+    text-align: center;
+    background: var(--color-background);
+    user-select: none;
+}
+
+.legend__item-content {
+    margin-left: .5ch;
+    display: inline-block;
+}
+
+:host(.layout--mobile) .legend__item-content {
+    display: none;
+}
+
+.legend__icon {
+    display: inline-block;
+}
+
+/* POPUP */
+.popup {
+    height: 100%;
+    box-sizing: border-box;
+    background: var(--color-background);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.popup__title {
+    padding: 12px 20px;
+    font-weight: 500;
+    color: var(--color-primary);
+
+    display: flex;
+    align-items: center;
+    gap: 0.5ch;
+}
+
+.popup__title-text {
+    font-size: 1.4em;
+    flex: 1;
+    text-align: center;
+}
+
+.popup__title-btn {
+    color: var(--color-secondary);
+    --color-bg-hover: rgba(var(--color-secondary-rgb), 0.2);
+}
+
+.popup__title-weekday {
+    text-transform: capitalize;
+}
+
+.popup__title-month {
+    text-transform: lowercase;
+}
+
+.popup__title-year {
+    text-transform: lowercase;
+    color: var(--color-text);
+}
+
+.popup__content {
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.popup__content.loading {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.loading-label {
+    opacity: 0.8;
+    color: var(--color-text);
+}
+
+:host(.layout--mobile) {
+    .popup__content {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.popup__footer {
+    /*padding: 12px 20px;*/
+    padding: 12px 0 0;
+}
+
+.popup__close-btn {
+    display: grid;
+    justify-content: stretch;
+    background: var(--color-background-shade);
+    color: var(--color-secondary);
+    --color-bg-hover: rgba(var(--color-secondary-rgb), 0.2);
+}
+
+.popup__close-btn::part(button-native) {
+    padding: 0.5em 20px;
+}
+
+
+/* CALENDAR */
+.calendar {
+}
+
+.calendar__cell {
+    margin: 0 8px;
+    padding-top: 8px;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+}
+
+.calendar__header {
+    padding: 6px;
+
+    background: var(--color-background-shade);
+    color: var(--color-primary);
+    text-transform: uppercase;
+
+    border: 1px solid var(--color-border);
+}
+
+.calendar__day-last-week {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.calendar__day-not-current-month {
+    opacity: 0.7;
+}
+
+
+/* CALENDAR ITEM */
+.calendar noi-button {
+    display: grid;
+    justify-content: stretch;
+}
+
+.day {
+    background: var(--color-background-shade);
+    color: var(--color-text);
+    display: block;
+}
+
+.day__btn {
+    opacity: 0.9;
+}
+
+.day__btn:hover:not(:disabled) {
+    opacity: 1;
+}
+
+.day__day {
+    padding: 6px;
+    text-align: left;
+    /*width: 96px;*/
+    /*margin: 0 auto;*/
+}
+
+.day__busy {
+    padding: 4px 6px 6px 6px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.day noi-traffic-level-box {
+    height: var(--busy-box-size);
+    /*width: 48px;*/
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:host(.layout--mobile) .day__busy {
+    flex-direction: column;
+}

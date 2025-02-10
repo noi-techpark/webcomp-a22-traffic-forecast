@@ -1,0 +1,22 @@
+{
+  "app.loading": "Caricamento...",
+  "app.no-data": "Nessun dato",
+  "app.title.month-prev": "Mese precedente",
+  "app.title.month-next": "Mese successivo",
+  "app.title.month-reset": "Mostra il mese corrente",
+  "app.popup.day-prev": "Giorno precedente",
+  "app.popup.day-next": "Giorno successivo",
+  "app.popup.close": "Chiudi",
+  "app.traffic.critical": "Critico",
+  "app.traffic.heavy": "Intenso",
+  "app.traffic.severe": "Sostenuto",
+  "app.traffic.regular": "Regolare",
+  "app.traffic.none": "Nessun dato",
+  "app.details.direction": "Direzione",
+  "app.details.direction-prefix": "Verso",
+  "app.details.part-hours": "ore",
+  "app.direction.south": "Sud",
+  "app.direction.south.letter": "S",
+  "app.direction.north": "Nord",
+  "app.direction.north.letter": "N"
+}

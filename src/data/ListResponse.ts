@@ -2,4 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-export { Components, JSX } from './components';
+export interface ListResponseV2<T> {
+  offset:number;
+  data: T[];
+}

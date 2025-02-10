@@ -1,0 +1,47 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+:host(.hidden) {
+  display: none;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  /**
+   * @prop --backdrop-color: backdrop color
+   */
+  background: var(--backdrop-color, rgba(0, 0, 0, 0.1));
+  /**
+   * @prop --backdrop-filter: backdrop filter
+   */
+  backdrop-filter: var(--backdrop-filter, none);
+}
+
+.content {
+  z-index: 1;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}

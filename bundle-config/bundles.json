@@ -1,8 +1,8 @@
 [
   {
-    "name": "traffic-prediction",
-    "entryPoint": "dist/components/noi-traffic-prediction.js",
-    "outputDir": "dist/bundle/noi-traffic-prediction",
+    "name": "a22-traffic-forecast",
+    "entryPoint": "dist/components/noi-a22-traffic-forecast.js",
+    "outputDir": "dist/bundle/noi-a22-traffic-forecast",
     "copy": [
       {
         "src": "assets/i18n_en.json",

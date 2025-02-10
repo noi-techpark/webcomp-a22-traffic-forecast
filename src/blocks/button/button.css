@@ -1,0 +1,52 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+:host {
+  display: inline-block;
+}
+
+
+.btn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  font-size: inherit;
+
+  /**
+   * @prop --color: Text color
+   */
+  color: var(--color, inherit);
+}
+
+.btn--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 50%;
+}
+
+.btn:hover:not(:disabled),
+.btn:focus:not(:disabled) {
+  /**
+   * @prop --color-bg-hover: Background hover color (rgb)
+   */
+  background: var(--color-bg-hover, rgba(0, 104, 180, 0.2));
+  /**
+   * @prop --color-hover: Background hover color (rgb)
+   */
+  color: var(--color-hover, var(--color, inherit));
+}
+
+.btn:disabled {
+  cursor: default;
+}

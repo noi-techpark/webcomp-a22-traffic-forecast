@@ -16,25 +16,120 @@ SPDX-License-Identifier: CC0-1.0
 </head>
 
 <body>
+<h1>Web Component - Boilerplate & Helloworld</h1>
 
-  <h1>Web Component - Boilerplate & Helloworld</h1>
+Code Snippet for web build:
+<pre style="overflow: hidden">
+  <code>
+    &lt;noi-traffic-prediction style="height: 600px; width: 100%;"&gt;&lt;/noi-traffic-prediction&gt;
 
-  Code Snippet:
-  <pre><code>
-    &lt;hello-world name="Hello World!"&gt;&lt;/hello-world&gt;
-
-    &lt;script type="module" src="./app.esm.js"&gt;&lt;/script&gt;
-    &lt;script nomodule src="./app.js"&gt;&lt;/script&gt;
-  </code></pre>
+    &lt;script type="module" src="./noi-a22-traffic-forecast.esm.js"&gt;&lt;/script&gt;
+  </code>
+</pre>
 
 
-  Output:
-  <!-- Set the attribute "title" and refer to it as property in JS -->
-  <hello-world name="Hello World!" />
-  <script type="module" src="./app.esm.js"></script>
-  <script nomodule src="./app.js"></script>
-<!--  <script type="module" src="./hello-world.entry.js"></script>-->
-<!--  <script src="webcomp-boilerplate.js"></script>-->
+Output:
+
+<!--  <hello-world name="Hello World!"></hello-world>-->
+<div>
+  <noi-a22-traffic-forecast id="webcam" location="Brennero" style="height: 670px; width: 100%"></noi-a22-traffic-forecast>
+</div>
+
+<script nomodule src="./noi-a22-traffic-forecast.js"></script>
+<script type="module" src="./noi-a22-traffic-forecast.esm.js"></script>
+
+
+<div>
+  <button onclick="webcam.style.width = '500px'">size x1</button>
+  <button onclick="webcam.style.width = '800px'">size x2</button>
+  <button onclick="webcam.style.width = '100%'">size full</button>
+  <button onclick="webcam.layout = 'mobile'">layout mobile</button>
+  <button onclick="webcam.layout = 'tablet'">layout tablet</button>
+  <button onclick="webcam.layout = 'desktop'">layout desktop</button>
+  <button onclick="webcam.layout = 'auto'">layout auto</button>
+  <button onclick="webcam.language = 'en'">lang: en</button>
+  <button onclick="webcam.language = 'it'">lang: it</button>
+  <button onclick="webcam.language = 'xx'">lang: xx (missing)</button>
+  <button onclick="webcam.language = null">lang: auto</button>
+  <button onclick="webcam.classList.remove('dark'); webcam.classList.remove('dark-alt')">styles: default</button>
+  <button onclick="webcam.classList.add('dark'); webcam.classList.remove('dark-alt')">styles: dark mode</button>
+  <button onclick="webcam.classList.remove('dark'); webcam.classList.add('dark-alt')">styles: dark mode alt</button>
+
+  <button onclick="webcam.viewDate='2025-01-01'">date: 2025-01-01</button>
+  <button onclick="webcam.changeViewMonth(1)">date: nextMonth</button>
+  <button onclick="webcam.selectDay('2025-01-01')">details: 2025-01-01</button>
+
+  <script>
+    function changeFontSize(change) {
+      const currentSize = parseInt(webcam.style.fontSize || '16px', 10);
+      webcam.style.fontSize = (currentSize + change) + 'px';
+    }
+  </script>
+  <button onclick="changeFontSize(-1)">font -</button>
+  <button onclick="changeFontSize(1)">font +</button>
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet">
+<style>
+  noi-a22-traffic-forecast {
+    font-family: "Roboto", serif;
+    outline: 1px solid red;
+  }
+
+  noi-a22-traffic-forecast.dark {
+    font-family: "Roboto", serif;
+    outline: 1px solid red;
+
+    --color-primary: rgb(224, 224, 224);
+    --color-primary-rgb: 224, 224, 224;
+    --color-text: #FFF;
+    --color-background: #333;
+    --color-background-shade: #474747;
+  }
+
+  noi-a22-traffic-forecast.dark-alt {
+    font-family: "Roboto", serif;
+    outline: 1px solid red;
+
+    --color-primary: rgb(224, 224, 224);
+    --color-primary-rgb: 224, 224, 224;
+    --color-secondary: rgb(192, 192, 192);
+    --color-secondary-rgb: 192, 192, 192;
+    --color-text: #FFF;
+    --color-background: #333;
+    --color-background-shade: #474747;
+
+    --color-border: #474747;
+
+    --color-busy-regular: #166c45;
+    --color-busy-critical: linear-gradient(135deg,
+    rgb(250, 184, 19) 0%,
+    rgb(250, 184, 19) 10%,
+    rgb(230, 34, 67) 11%,
+    rgb(230, 34, 67) 21%,
+    rgb(250, 184, 19) 22%,
+    rgb(250, 184, 19) 32%,
+    rgb(230, 34, 67) 33%,
+    rgb(230, 34, 67) 43%,
+    rgb(250, 184, 19) 44%,
+    rgb(250, 184, 19) 54%,
+    rgb(230, 34, 67) 55%,
+    rgb(230, 34, 67) 65%,
+    rgb(250, 184, 19) 66%,
+    rgb(250, 184, 19) 76%,
+    rgb(230, 34, 67) 77%,
+    rgb(230, 34, 67) 87%,
+    rgb(250, 184, 19) 88%,
+    rgb(250, 184, 19) 100%
+    );
+
+    --backdrop-color: rgba(128, 128, 128, 0.5);
+    --backdrop-filter: blur(3px);
+  }
+</style>
 
 </body>
 

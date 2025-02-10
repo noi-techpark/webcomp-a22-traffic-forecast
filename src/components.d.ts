@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 /* eslint-disable */
 /* tslint:disable */
 /**
@@ -5,35 +9,415 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { TrafficPredictionLocation } from "./data/traffic-prediction/TrafficPrediction";
+import { ViewLayout } from "./data/breakpoints";
+import { CalendarDayContext } from "./blocks/calendar-month/calendar-month.component";
+import { IconName } from "./blocks/icon/icon.component";
+import { TrafficPredictionDirection, TrafficPredictionTime, TrafficPredictionValue } from "./data/traffic-prediction/TrafficPredictionShort";
+export { TrafficPredictionLocation } from "./data/traffic-prediction/TrafficPrediction";
+export { ViewLayout } from "./data/breakpoints";
+export { CalendarDayContext } from "./blocks/calendar-month/calendar-month.component";
+export { IconName } from "./blocks/icon/icon.component";
+export { TrafficPredictionDirection, TrafficPredictionTime, TrafficPredictionValue } from "./data/traffic-prediction/TrafficPredictionShort";
 export namespace Components {
-    interface HelloWorld {
-        "name": string;
+    /**
+     * Traffic forecast component
+     */
+    interface NoiA22TrafficForecast {
+        /**
+          * Change view month
+          * @param change The number of months to shift the view. A positive value moves forward in time, while a negative value moves backward.
+         */
+        "changeViewMonth": (change: number) => Promise<void>;
+        /**
+          * Language
+         */
+        "language": string;
+        /**
+          * Layout appearance
+         */
+        "layout": ViewLayout;
+        /**
+          * Location
+         */
+        "location": TrafficPredictionLocation;
+        /**
+          * Go back to current month
+         */
+        "resetToCurrentMonth": () => Promise<void>;
+        /**
+          * Open day details
+         */
+        "selectDay": (day: Date | string | number | null) => Promise<void>;
+        /**
+          * View date (only month and year makes an impact)
+         */
+        "viewDate": string | number | Date;
+    }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
+    interface NoiBackdrop {
+        /**
+          * Removing backdrop from DOM sometime can cause blink during layout recalculation. 'hidden' can be used to hide the backdrop without removing from DOM
+          * @default false
+         */
+        "hidden": boolean;
+    }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
+    interface NoiButton {
+        /**
+          * button 'disabled' property
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * icon-only buttons has circle shape. The size of the button can be changed with "font-size" style
+          * @default false
+         */
+        "iconOnly": boolean;
+    }
+    /**
+     * (INTERNAL) Calendar component.
+     * It's not encapsulated, so the styles can be applied outside of the component.
+     */
+    interface NoiCalendarMonth {
+        /**
+          * Cell render function
+          * @default (context)=><span>{context.date.toLocaleDateString()}</span>
+         */
+        "itemRenderer"?: (d: CalendarDayContext) => any;
+        /**
+          * Language for day names
+          * @default en
+         */
+        "language": string;
+        /**
+          * calendar view date
+          * @default current date
+         */
+        "viewDate": Date;
+    }
+    /**
+     * (INTERNAL) render an icon.
+     * Icons are embedded inside the component (so far).
+     * Icon size can be changed by 'font-size' style
+     */
+    interface NoiIcon {
+        /**
+          * icon name
+         */
+        "name": IconName | string;
+    }
+    /**
+     * (INTERNAL) render loading indicator over the content.
+     * This allows to render content with empty data hidden behind the loader,
+     * so when data is loaded there would be no resize onf the content
+     */
+    interface NoiLoading {
+        /**
+          * Input placeholder
+         */
+        "isLoading": boolean;
+    }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
+    interface NoiTrafficDayDetails {
+        "details": { [dayPart in TrafficPredictionTime]: TrafficPredictionValue };
+        "direction": TrafficPredictionDirection;
+    }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
+    interface NoiTrafficLevelBox {
+        "level": TrafficPredictionValue;
     }
 }
+export interface NoiBackdropCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNoiBackdropElement;
+}
+export interface NoiButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNoiButtonElement;
+}
 declare global {
-    interface HTMLHelloWorldElement extends Components.HelloWorld, HTMLStencilElement {
+    /**
+     * Traffic forecast component
+     */
+    interface HTMLNoiA22TrafficForecastElement extends Components.NoiA22TrafficForecast, HTMLStencilElement {
     }
-    var HTMLHelloWorldElement: {
-        prototype: HTMLHelloWorldElement;
-        new (): HTMLHelloWorldElement;
+    var HTMLNoiA22TrafficForecastElement: {
+        prototype: HTMLNoiA22TrafficForecastElement;
+        new (): HTMLNoiA22TrafficForecastElement;
+    };
+    interface HTMLNoiBackdropElementEventMap {
+        "backdropClick": void;
+    }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
+    interface HTMLNoiBackdropElement extends Components.NoiBackdrop, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLNoiBackdropElementEventMap>(type: K, listener: (this: HTMLNoiBackdropElement, ev: NoiBackdropCustomEvent<HTMLNoiBackdropElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLNoiBackdropElementEventMap>(type: K, listener: (this: HTMLNoiBackdropElement, ev: NoiBackdropCustomEvent<HTMLNoiBackdropElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLNoiBackdropElement: {
+        prototype: HTMLNoiBackdropElement;
+        new (): HTMLNoiBackdropElement;
+    };
+    interface HTMLNoiButtonElementEventMap {
+        "btnClick": MouseEvent;
+    }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
+    interface HTMLNoiButtonElement extends Components.NoiButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLNoiButtonElementEventMap>(type: K, listener: (this: HTMLNoiButtonElement, ev: NoiButtonCustomEvent<HTMLNoiButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLNoiButtonElementEventMap>(type: K, listener: (this: HTMLNoiButtonElement, ev: NoiButtonCustomEvent<HTMLNoiButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLNoiButtonElement: {
+        prototype: HTMLNoiButtonElement;
+        new (): HTMLNoiButtonElement;
+    };
+    /**
+     * (INTERNAL) Calendar component.
+     * It's not encapsulated, so the styles can be applied outside of the component.
+     */
+    interface HTMLNoiCalendarMonthElement extends Components.NoiCalendarMonth, HTMLStencilElement {
+    }
+    var HTMLNoiCalendarMonthElement: {
+        prototype: HTMLNoiCalendarMonthElement;
+        new (): HTMLNoiCalendarMonthElement;
+    };
+    /**
+     * (INTERNAL) render an icon.
+     * Icons are embedded inside the component (so far).
+     * Icon size can be changed by 'font-size' style
+     */
+    interface HTMLNoiIconElement extends Components.NoiIcon, HTMLStencilElement {
+    }
+    var HTMLNoiIconElement: {
+        prototype: HTMLNoiIconElement;
+        new (): HTMLNoiIconElement;
+    };
+    /**
+     * (INTERNAL) render loading indicator over the content.
+     * This allows to render content with empty data hidden behind the loader,
+     * so when data is loaded there would be no resize onf the content
+     */
+    interface HTMLNoiLoadingElement extends Components.NoiLoading, HTMLStencilElement {
+    }
+    var HTMLNoiLoadingElement: {
+        prototype: HTMLNoiLoadingElement;
+        new (): HTMLNoiLoadingElement;
+    };
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
+    interface HTMLNoiTrafficDayDetailsElement extends Components.NoiTrafficDayDetails, HTMLStencilElement {
+    }
+    var HTMLNoiTrafficDayDetailsElement: {
+        prototype: HTMLNoiTrafficDayDetailsElement;
+        new (): HTMLNoiTrafficDayDetailsElement;
+    };
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
+    interface HTMLNoiTrafficLevelBoxElement extends Components.NoiTrafficLevelBox, HTMLStencilElement {
+    }
+    var HTMLNoiTrafficLevelBoxElement: {
+        prototype: HTMLNoiTrafficLevelBoxElement;
+        new (): HTMLNoiTrafficLevelBoxElement;
     };
     interface HTMLElementTagNameMap {
-        "hello-world": HTMLHelloWorldElement;
+        "noi-a22-traffic-forecast": HTMLNoiA22TrafficForecastElement;
+        "noi-backdrop": HTMLNoiBackdropElement;
+        "noi-button": HTMLNoiButtonElement;
+        "noi-calendar-month": HTMLNoiCalendarMonthElement;
+        "noi-icon": HTMLNoiIconElement;
+        "noi-loading": HTMLNoiLoadingElement;
+        "noi-traffic-day-details": HTMLNoiTrafficDayDetailsElement;
+        "noi-traffic-level-box": HTMLNoiTrafficLevelBoxElement;
     }
 }
 declare namespace LocalJSX {
-    interface HelloWorld {
-        "name"?: string;
+    /**
+     * Traffic forecast component
+     */
+    interface NoiA22TrafficForecast {
+        /**
+          * Language
+         */
+        "language"?: string;
+        /**
+          * Layout appearance
+         */
+        "layout"?: ViewLayout;
+        /**
+          * Location
+         */
+        "location"?: TrafficPredictionLocation;
+        /**
+          * View date (only month and year makes an impact)
+         */
+        "viewDate"?: string | number | Date;
+    }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
+    interface NoiBackdrop {
+        /**
+          * Removing backdrop from DOM sometime can cause blink during layout recalculation. 'hidden' can be used to hide the backdrop without removing from DOM
+          * @default false
+         */
+        "hidden"?: boolean;
+        /**
+          * Emitted when user clicks on the backdrop
+         */
+        "onBackdropClick"?: (event: NoiBackdropCustomEvent<void>) => void;
+    }
+    /**
+     * (INTERNAL) Backdrop component.
+     */
+    interface NoiButton {
+        /**
+          * button 'disabled' property
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * icon-only buttons has circle shape. The size of the button can be changed with "font-size" style
+          * @default false
+         */
+        "iconOnly"?: boolean;
+        /**
+          * Emitted when user clicks on the button
+         */
+        "onBtnClick"?: (event: NoiButtonCustomEvent<MouseEvent>) => void;
+    }
+    /**
+     * (INTERNAL) Calendar component.
+     * It's not encapsulated, so the styles can be applied outside of the component.
+     */
+    interface NoiCalendarMonth {
+        /**
+          * Cell render function
+          * @default (context)=><span>{context.date.toLocaleDateString()}</span>
+         */
+        "itemRenderer"?: (d: CalendarDayContext) => any;
+        /**
+          * Language for day names
+          * @default en
+         */
+        "language"?: string;
+        /**
+          * calendar view date
+          * @default current date
+         */
+        "viewDate"?: Date;
+    }
+    /**
+     * (INTERNAL) render an icon.
+     * Icons are embedded inside the component (so far).
+     * Icon size can be changed by 'font-size' style
+     */
+    interface NoiIcon {
+        /**
+          * icon name
+         */
+        "name"?: IconName | string;
+    }
+    /**
+     * (INTERNAL) render loading indicator over the content.
+     * This allows to render content with empty data hidden behind the loader,
+     * so when data is loaded there would be no resize onf the content
+     */
+    interface NoiLoading {
+        /**
+          * Input placeholder
+         */
+        "isLoading"?: boolean;
+    }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
+    interface NoiTrafficDayDetails {
+        "details"?: { [dayPart in TrafficPredictionTime]: TrafficPredictionValue };
+        "direction"?: TrafficPredictionDirection;
+    }
+    /**
+     * (INTERNAL) part of 'noi-traffic-prediction'
+     */
+    interface NoiTrafficLevelBox {
+        "level"?: TrafficPredictionValue;
     }
     interface IntrinsicElements {
-        "hello-world": HelloWorld;
+        "noi-a22-traffic-forecast": NoiA22TrafficForecast;
+        "noi-backdrop": NoiBackdrop;
+        "noi-button": NoiButton;
+        "noi-calendar-month": NoiCalendarMonth;
+        "noi-icon": NoiIcon;
+        "noi-loading": NoiLoading;
+        "noi-traffic-day-details": NoiTrafficDayDetails;
+        "noi-traffic-level-box": NoiTrafficLevelBox;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "hello-world": LocalJSX.HelloWorld & JSXBase.HTMLAttributes<HTMLHelloWorldElement>;
+            /**
+             * Traffic forecast component
+             */
+            "noi-a22-traffic-forecast": LocalJSX.NoiA22TrafficForecast & JSXBase.HTMLAttributes<HTMLNoiA22TrafficForecastElement>;
+            /**
+             * (INTERNAL) Backdrop component.
+             */
+            "noi-backdrop": LocalJSX.NoiBackdrop & JSXBase.HTMLAttributes<HTMLNoiBackdropElement>;
+            /**
+             * (INTERNAL) Backdrop component.
+             */
+            "noi-button": LocalJSX.NoiButton & JSXBase.HTMLAttributes<HTMLNoiButtonElement>;
+            /**
+             * (INTERNAL) Calendar component.
+             * It's not encapsulated, so the styles can be applied outside of the component.
+             */
+            "noi-calendar-month": LocalJSX.NoiCalendarMonth & JSXBase.HTMLAttributes<HTMLNoiCalendarMonthElement>;
+            /**
+             * (INTERNAL) render an icon.
+             * Icons are embedded inside the component (so far).
+             * Icon size can be changed by 'font-size' style
+             */
+            "noi-icon": LocalJSX.NoiIcon & JSXBase.HTMLAttributes<HTMLNoiIconElement>;
+            /**
+             * (INTERNAL) render loading indicator over the content.
+             * This allows to render content with empty data hidden behind the loader,
+             * so when data is loaded there would be no resize onf the content
+             */
+            "noi-loading": LocalJSX.NoiLoading & JSXBase.HTMLAttributes<HTMLNoiLoadingElement>;
+            /**
+             * (INTERNAL) part of 'noi-traffic-prediction'
+             */
+            "noi-traffic-day-details": LocalJSX.NoiTrafficDayDetails & JSXBase.HTMLAttributes<HTMLNoiTrafficDayDetailsElement>;
+            /**
+             * (INTERNAL) part of 'noi-traffic-prediction'
+             */
+            "noi-traffic-level-box": LocalJSX.NoiTrafficLevelBox & JSXBase.HTMLAttributes<HTMLNoiTrafficLevelBoxElement>;
         }
     }
 }
