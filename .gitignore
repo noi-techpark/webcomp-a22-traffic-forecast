@@ -19,3 +19,5 @@ yarn-error.log*
 .env
 dist/
 workspace/
+.stencil
+www

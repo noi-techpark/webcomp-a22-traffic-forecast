@@ -1,0 +1,17 @@
+/*
+ * SPDX-FileCopyrightText: 2025 NOI Techpark <digital@noi.bz.it>
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+:host {
+  display: inline-block;
+  line-height: 0; /* ignore possible whitespace */
+  height: 1.5em;
+  width: 1.5em;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}

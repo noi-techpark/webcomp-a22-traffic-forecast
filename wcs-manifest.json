@@ -1,10 +1,10 @@
 {
-  "title": "Hello-world",
-  "shortName": "hello-world-2",
-  "description": "Hello world simple webcomp example",
-  "descriptionAbstract": "Hello world simple webcomp example",
+  "title": "Brennerlec traffic forecast",
+  "shortName": "noi-a22-traffic-forecast",
+  "description": "A responsive webcomponent for showing traffic forecast Brennerlec A22 road",
+  "descriptionAbstract": "A responsive webcomponent for showing traffic forecast on Brennerlec A22 road",
   "license": "AGPL-3.0-or-later",
-  "repositoryUrl": "https://your-repository.git",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-a22-traffic-forecast.git",
   "copyrightHolders": [
     {
       "name": "NOI",
@@ -15,32 +15,84 @@
   ],
   "authors": [
     {
-      "name": "...",
-      "email": "...",
-      "organization": "...",
-      "organizationUrl": "..."
+      "name": "NOI",
+      "email": "digital@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    },
+    {
+      "name": "Solhea",
+      "email": "info@solhea.com",
+      "organization": "Solhea S.R.L.",
+      "organizationUrl": "https://solhea.com"
     }
   ],
   "image": "wcs-logo.png",
   "searchTags": [],
   "dist": {
-    "basePath": "dist",
+    "basePath": "dist/bundle/noi-a22-traffic-forecast",
     "files": [
-      "webcomp-boilerplate.min.js"
+      "noi-a22-traffic-forecast.js",
+      "i18n_en.json",
+      "i18n_it.json"
     ],
     "scripts": [
+      {
+        "file": "noi-a22-traffic-forecast.js",
+        "parameter": "type='module'"
+      }
     ]
   },
   "configuration": {
-    "tagName": "hello-world",
+    "tagName": "noi-a22-traffic-forecast",
     "options": [
       {
-        "key": "title",
-        "type": "text",
-        "label": "title of the web-comp",
+        "key": "location",
+        "type": "select",
+        "label": "Forecast location",
+        "required": true,
+        "options": {
+          "values": [
+            "Brennero",
+            "Bolzano",
+            "Verona"
+          ]
+        }
+      },
+      {
+        "key": "layout",
+        "type": "select",
+        "label": "Layout appearance",
         "required": false,
         "options": {
-          "default": "hello-world"
+          "values": [
+            "desktop",
+            "mobile",
+            "auto"
+          ],
+          "default": "auto"
+        }
+      },
+      {
+        "key": "language",
+        "type": "select",
+        "label": "Two letter key for the language to be used, if omitted the widget will use the browser language. Fallback is `en`",
+        "required": false,
+        "options": {
+          "values": [
+            "en",
+            "it"
+          ],
+          "default": "en"
+        }
+      },
+      {
+        "key": "style",
+        "type": "text",
+        "label": "CSS style definition",
+        "required": false,
+        "options": {
+          "default": " --color-primary: #0068B4; --color-primary-rgb: 0, 104, 180; --color-secondary: #00A767; --color-secondary-rgb: 0, 167, 103; --color-text: #333333; --color-background: #FFFFFF; --color-background-shade: #F7F7F7; --color-border: #d0d0d0; --color-footer: #0068b4; --color-footer-contrast: #FFFFFF; --color-busy-regular: #18a767; --color-busy-regular-contrast: #FFFFFF; --color-busy-severe: #fab813; --color-busy-severe-contrast: #FFFFFF; --color-busy-heavy: #e62243; --color-busy-heavy-contrast: #FFFFFF; --color-busy-critical: #000000; --color-busy-critical-contrast: #FFFFFF; --busy-box-size: 3em;"
         }
       }
     ]
